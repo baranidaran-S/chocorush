@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ChocoRush brand palette: chocolate, cream, strawberry pink */
+@theme {
+  --color-cocoa-950: #1a0e09;
+  --color-cocoa-900: #2a170f;
+  --color-cocoa-800: #3b2116;
+  --color-cocoa-700: #54301f;
+  --color-cocoa-600: #6e412b;
+  --color-cocoa-500: #8b5a3c;
+  --color-cocoa-400: #a97b5b;
+  --color-cocoa-300: #c9a185;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-cream-50: #fffbf5;
+  --color-cream-100: #fdf5e9;
+  --color-cream-200: #f8e9d4;
+  --color-cream-300: #f0d9b8;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-berry-300: #f7b3c4;
+  --color-berry-400: #f08aa5;
+  --color-berry-500: #e5607f;
+  --color-berry-600: #c94566;
+
+  --color-caramel-400: #e0a96d;
+  --color-caramel-500: #c98a4b;
+
+  --animate-bob: bob 6s ease-in-out infinite;
+  --animate-shadow-pulse: shadow-pulse 6s ease-in-out infinite;
+  --animate-badge-spin: badge-spin 18s linear infinite;
+  --animate-sprinkle: sprinkle-fall 12s linear infinite;
+  --animate-marquee: marquee 32s linear infinite;
+
+  @keyframes bob {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-14px) rotate(2.5deg);
+    }
+  }
+
+  @keyframes shadow-pulse {
+    0%,
+    100% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scaleX(0.82);
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes badge-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @keyframes sprinkle-fall {
+    from {
+      transform: translate3d(0, -12vh, 0) rotate(var(--rot, 0deg));
+    }
+    to {
+      transform: translate3d(var(--drift, 0px), 112vh, 0) rotate(calc(var(--rot, 0deg) + 540deg));
+    }
   }
 }
 
+@theme inline {
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream-50);
+  color: var(--color-cocoa-900);
+}
+
+::selection {
+  background: var(--color-berry-300);
+  color: var(--color-cocoa-950);
 }
