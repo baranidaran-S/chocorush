@@ -1,6 +1,7 @@
 "use client";
 
-import { useId, useRef, type CSSProperties, type PointerEvent, type ReactNode } from "react";
+import { useRef, type CSSProperties, type PointerEvent, type ReactNode } from "react";
+import Image from "next/image";
 import {
   motion,
   useMotionValue,
@@ -10,14 +11,12 @@ import {
   useTransform,
   type MotionValue,
 } from "motion/react";
-import { ArrowRightIcon, HeartIcon, WhatsAppIcon } from "@/components/icons";
-import { CakeIllustration, ChocoChunkIllustration, StrawberryIllustration } from "@/components/illustrations";
+import { ArrowRightIcon, WhatsAppIcon } from "@/components/icons";
+import { ChocoChunkIllustration, StrawberryIllustration } from "@/components/illustrations";
 import { SmartImage } from "@/components/ui/smart-image";
 import { DeliveryLinks } from "@/components/delivery-links";
 import { mulberry32, round } from "@/lib/random";
 import { whatsappLink } from "@/lib/site";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
 
 const SPRINKLE_COLORS = ["bg-berry-400", "bg-caramel-400", "bg-cocoa-600", "bg-berry-300", "bg-caramel-500"];
 const SPRINKLES = (() => {
@@ -91,46 +90,34 @@ export function Hero() {
               className="flex select-none flex-col items-center font-display text-[length:var(--fs)] font-black leading-[0.8] tracking-[-0.045em] [font-variation-settings:'SOFT'_100,'WONK'_1]"
             >
               <motion.div style={{ x: reduce ? 0 : chocoX }} className="relative z-10 text-cocoa-800">
-                <RisingLetters text="CHOCO" delay={0.1} />
+                <RisingLetters text="CHOCO" delay={0.05} />
               </motion.div>
               <motion.div
                 style={{ x: reduce ? 0 : rushX }}
                 className="relative z-30 text-berry-500 drop-shadow-[0_12px_28px_rgb(42_23_15/0.25)]"
               >
-                <RisingLetters text="RUSH" delay={0.3} />
+                <RisingLetters text="RUSH" delay={0.2} />
               </motion.div>
             </div>
 
             <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 size-[calc(var(--fs)*2.5)] -translate-x-1/2 -translate-y-[40%] lg:size-[calc(var(--fs)*1.95)]">
               <motion.div style={{ scale: reduce ? 1 : cakeScale, rotate: reduce ? 0 : cakeRotate }} className="size-full">
                 <motion.div style={{ x: cakeX, y: cakeY, rotate: cakeTilt }} className="size-full">
-                  <motion.div
-                    initial={{ y: "-70vh", opacity: 0, rotate: -12, scale: 0.85 }}
-                    animate={{ y: 0, opacity: 1, rotate: 0, scale: 1 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 90,
-                      damping: 13,
-                      delay: 0.55,
-                      opacity: { duration: 0.3, delay: 0.55 },
-                    }}
-                    className="relative size-full"
-                  >
+                  <div className="relative size-full motion-safe:animate-cake-drop" style={{ animationDelay: "0.25s" }}>
                     <div className="absolute inset-x-[16%] bottom-[2%] h-[7%] rounded-[50%] bg-cocoa-900/35 blur-xl motion-safe:animate-shadow-pulse" />
                     <div className="relative size-full motion-safe:animate-bob">
-                      <SmartImage
+                      {/* Plain image (no fade-in) so it shows the moment it arrives */}
+                      <Image
                         src="/images/hero/hero-cake.png"
                         alt="Chocolate drip cake topped with strawberries, truffles and chocolate shards"
-                        width={2048}
-                        height={2048}
+                        width={1254}
+                        height={1254}
                         sizes="(min-width: 1024px) 45vw, 80vw"
-                        loading="eager"
-                        fetchPriority="high"
+                        preload
                         className="size-full object-contain"
-                        fallback={<CakeIllustration className="size-full" />}
                       />
                     </div>
-                  </motion.div>
+                  </div>
                 </motion.div>
               </motion.div>
             </div>
@@ -138,15 +125,6 @@ export function Hero() {
             {FLOATERS.map((floater, i) => (
               <FloatingTreat key={i} floater={floater} index={i} mouseX={springX} mouseY={springY} progress={scrollYProgress} />
             ))}
-
-            <motion.div
-              initial={{ scale: 0, rotate: -120 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ type: "spring", stiffness: 120, damping: 14, delay: 1.35 }}
-              className="absolute right-[3%] top-[6%] z-30 size-[clamp(78px,9vw,124px)] sm:right-[14%] lg:right-[22%] lg:top-[4%]"
-            >
-              <SpinningBadge />
-            </motion.div>
           </div>
 
           {/* Headline + calls to action, centred under the composition */}
@@ -154,7 +132,7 @@ export function Hero() {
             style={{ opacity: contentOpacity, y: reduce ? 0 : contentY }}
             className="relative z-40 flex flex-col items-center text-center"
           >
-            <FadeUp delay={1.05} className="mb-3 hidden [@media(min-height:820px)]:block">
+            <FadeUp delay={0.4} className="mb-3 hidden [@media(min-height:820px)]:block">
               <span className="inline-flex items-center gap-2 rounded-full bg-cream-100/80 px-3 py-1 text-xs font-medium text-cocoa-700 ring-1 ring-cocoa-800/10 backdrop-blur">
                 <span className="relative flex size-2">
                   <span className="absolute inline-flex size-full rounded-full bg-berry-400 opacity-75 motion-safe:animate-ping" />
@@ -164,18 +142,18 @@ export function Hero() {
               </span>
             </FadeUp>
             <h1 className="flex flex-wrap justify-center gap-x-[0.28em] font-display text-[clamp(2.25rem,min(6.2vw,9svh),5.5rem)] font-semibold leading-[1.02] tracking-tight text-cocoa-900 [font-variation-settings:'SOFT'_50]">
-              <RisingWords delay={1.1}>Happiness,</RisingWords>
-              <RisingWords delay={1.22} className="italic text-berry-500">
+              <RisingWords delay={0.45}>Happiness,</RisingWords>
+              <RisingWords delay={0.55} className="italic text-berry-500">
                 freshly baked.
               </RisingWords>
             </h1>
-            <FadeUp delay={1.35}>
+            <FadeUp delay={0.65}>
               <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-cocoa-600 sm:text-lg">
                 Cakes, custom birthday cakes, waffles, brownies, brownie tubs and shakes — baked fresh for every
                 celebration, big or small.
               </p>
             </FadeUp>
-            <FadeUp delay={1.5} className="mt-5 flex flex-col items-center gap-3">
+            <FadeUp delay={0.75} className="mt-5 flex flex-col items-center gap-3">
               <div className="flex flex-wrap justify-center gap-3">
                 <a
                   href={whatsappLink()}
@@ -238,17 +216,12 @@ function Backdrop() {
 
 function RisingLetters({ text, delay }: { text: string; delay: number }) {
   return (
-    <span className="-my-[0.06em] flex overflow-hidden py-[0.06em]">
+    // Clipped so letters can rise from below; side padding keeps the tightly tracked last letter from being sliced.
+    <span className="-mx-[0.1em] -my-[0.06em] flex overflow-hidden px-[0.1em] py-[0.06em]">
       {text.split("").map((char, i) => (
-        <motion.span
-          key={i}
-          className="inline-block"
-          initial={{ y: "110%" }}
-          animate={{ y: "0%" }}
-          transition={{ duration: 1, ease: EASE, delay: delay + i * 0.06 }}
-        >
+        <span key={i} className="inline-block motion-safe:animate-rise" style={{ animationDelay: `${delay + i * 0.05}s` }}>
           {char}
-        </motion.span>
+        </span>
       ))}
     </span>
   );
@@ -256,29 +229,19 @@ function RisingLetters({ text, delay }: { text: string; delay: number }) {
 
 function RisingWords({ children, delay, className }: { children: ReactNode; delay: number; className?: string }) {
   return (
-    <span className="-mb-[0.14em] inline-block overflow-hidden pb-[0.14em]">
-      <motion.span
-        className={`inline-block ${className ?? ""}`}
-        initial={{ y: "110%" }}
-        animate={{ y: "0%" }}
-        transition={{ duration: 0.9, ease: EASE, delay }}
-      >
+    <span className="-mx-[0.1em] -mb-[0.14em] inline-block overflow-hidden px-[0.1em] pb-[0.14em]">
+      <span className={`inline-block motion-safe:animate-rise ${className ?? ""}`} style={{ animationDelay: `${delay}s` }}>
         {children}
-      </motion.span>
+      </span>
     </span>
   );
 }
 
 function FadeUp({ children, delay, className }: { children: ReactNode; delay: number; className?: string }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: EASE, delay }}
-      className={className}
-    >
+    <div className={`motion-safe:animate-fade-up ${className ?? ""}`} style={{ animationDelay: `${delay}s` }}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -310,7 +273,7 @@ function FloatingTreat({
         <motion.div
           initial={{ scale: 0, opacity: 0, rotate: floater.rotate - 60 }}
           animate={{ scale: 1, opacity: 1, rotate: floater.rotate }}
-          transition={{ type: "spring", stiffness: 140, damping: 12, delay: 1.15 + index * 0.08 }}
+          transition={{ type: "spring", stiffness: 160, damping: 12, delay: 0.45 + index * 0.06 }}
         >
           <div
             className="motion-safe:animate-bob"
@@ -329,27 +292,5 @@ function FloatingTreat({
         </motion.div>
       </motion.div>
     </motion.div>
-  );
-}
-
-function SpinningBadge() {
-  const pathId = useId();
-
-  return (
-    <div className="relative size-full rounded-full bg-cocoa-900 text-cream-100 shadow-xl shadow-cocoa-900/25">
-      <svg viewBox="0 0 100 100" className="size-full motion-safe:animate-badge-spin">
-        <defs>
-          <path id={pathId} d="M50 50m-36 0a36 36 0 1 1 72 0a36 36 0 1 1-72 0" />
-        </defs>
-        <text className="fill-current font-sans text-[8.6px] font-semibold uppercase tracking-[0.18em]">
-          <textPath href={`#${pathId}`} textLength={224} lengthAdjust="spacing">
-            Baked fresh • Made with love •
-          </textPath>
-        </text>
-      </svg>
-      <span className="absolute inset-0 grid place-items-center">
-        <HeartIcon className="size-[26%] text-berry-400" />
-      </span>
-    </div>
   );
 }

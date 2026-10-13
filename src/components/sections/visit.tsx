@@ -81,7 +81,7 @@ export function Visit() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
             className="relative flex flex-col overflow-hidden rounded-[2rem] bg-cocoa-900 p-6 text-cream-50 shadow-[0_30px_60px_-30px_rgb(42_23_15/0.6)] sm:p-8"
           >
             <div aria-hidden className="pointer-events-none absolute -right-16 -top-16 size-56 rounded-full bg-berry-500/25 blur-3xl" />

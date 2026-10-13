@@ -18,7 +18,7 @@ export function SmartImage({ fallback, alt, className, onLoad, onError, ...props
     <Image
       {...props}
       alt={alt}
-      className={`${className ?? ""} transition-opacity duration-500 ${status === "loaded" ? "opacity-100" : "opacity-0"}`}
+      className={`${className ?? ""} transition-opacity duration-300 ${status === "loaded" ? "opacity-100" : "opacity-0"}`}
       onLoad={(e) => {
         setStatus("loaded");
         onLoad?.(e);

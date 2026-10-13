@@ -105,10 +105,10 @@ function CategoryCard({ category, index }: { category: Category; index: number }
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 90 }}
+      initial={{ opacity: 0, y: 70 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      transition={{ type: "spring", stiffness: 70, damping: 16, delay: (index % 3) * 0.12 }}
+      transition={{ type: "spring", stiffness: 120, damping: 18, delay: (index % 3) * 0.08 }}
       className="h-full [perspective:1200px]"
     >
       <motion.a
@@ -137,7 +137,7 @@ function CategoryCard({ category, index }: { category: Category; index: number }
             initial={{ scale: 0.6, rotate: -14, opacity: 0 }}
             whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ type: "spring", stiffness: 120, damping: 12, delay: 0.25 + (index % 3) * 0.12 }}
+            transition={{ type: "spring", stiffness: 160, damping: 13, delay: 0.12 + (index % 3) * 0.08 }}
           >
             <motion.span
               className="relative block aspect-square"
@@ -149,7 +149,7 @@ function CategoryCard({ category, index }: { category: Category; index: number }
                 src={category.image}
                 alt=""
                 fill
-                sizes="(min-width: 1024px) 320px, (min-width: 640px) 40vw, 70vw"
+                sizes="(min-width: 1024px) 320px, (min-width: 640px) 40vw, 80vw"
                 className="object-contain drop-shadow-[0_22px_22px_rgb(42_23_15/0.3)]"
                 fallback={<span className="absolute inset-[12%] rounded-full bg-white/30" />}
               />

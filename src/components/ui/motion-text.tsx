@@ -9,10 +9,10 @@ export const EASE = [0.22, 1, 0.36, 1] as const;
 export function Reveal({ children, delay = 0, className }: { children: ReactNode; delay?: number; className?: string }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.6 }}
-      transition={{ duration: 0.8, ease: EASE, delay }}
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ duration: 0.6, ease: EASE, delay }}
       className={className}
     >
       {children}
@@ -23,10 +23,10 @@ export function Reveal({ children, delay = 0, className }: { children: ReactNode
 /** Rises into view when the parent heading animates to "show". */
 export function RisingWords({ children, delay, className }: { children: ReactNode; delay: number; className?: string }) {
   return (
-    <span className="-mb-[0.14em] inline-block overflow-hidden pb-[0.14em] align-bottom">
+    <span className="-mx-[0.1em] -mb-[0.14em] inline-block overflow-hidden px-[0.1em] pb-[0.14em] align-bottom">
       <motion.span
         className={`inline-block ${className ?? ""}`}
-        variants={{ hidden: { y: "110%" }, show: { y: "0%", transition: { duration: 0.9, ease: EASE, delay } } }}
+        variants={{ hidden: { y: "110%" }, show: { y: "0%", transition: { duration: 0.7, ease: EASE, delay } } }}
       >
         {children}
       </motion.span>
@@ -54,7 +54,7 @@ export function Squiggle() {
           show: {
             pathLength: 1,
             opacity: 1,
-            transition: { pathLength: { duration: 1.1, ease: EASE, delay: 0.7 }, opacity: { duration: 0.01, delay: 0.7 } },
+            transition: { pathLength: { duration: 0.8, ease: EASE, delay: 0.45 }, opacity: { duration: 0.01, delay: 0.45 } },
           },
         }}
       />

@@ -24,7 +24,7 @@ const pin: Variants = {
     y: 0,
     scale: 1,
     rotate: NOTES[i % NOTES.length].tilt,
-    transition: { type: "spring", stiffness: 120, damping: 14, delay: 0.1 + i * 0.08 },
+    transition: { type: "spring", stiffness: 170, damping: 16, delay: 0.05 + i * 0.05 },
   }),
 };
 

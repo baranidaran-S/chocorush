@@ -63,7 +63,7 @@ export function CustomCake() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.9, ease: EASE }}
+        transition={{ duration: 0.7, ease: EASE }}
         className="group/strip relative mt-2 py-12 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
       >
         <ul className="flex w-max gap-6 pr-6 will-change-transform motion-safe:animate-marquee group-hover/strip:[animation-play-state:paused] sm:[animation-duration:64s]">
@@ -102,7 +102,7 @@ export function CustomCake() {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.8 }}
-              transition={{ duration: 0.6, ease: EASE, delay: i * 0.1 }}
+              transition={{ duration: 0.5, ease: EASE, delay: i * 0.08 }}
               className="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-semibold text-cocoa-800 ring-1 ring-cocoa-900/10"
             >
               <HeartIcon className="size-4 text-berry-500" />
