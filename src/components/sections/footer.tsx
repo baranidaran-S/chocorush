@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { cacheLife } from "next/cache";
 import { ArrowRightIcon, InstagramIcon, WhatsAppIcon } from "@/components/icons";
 import { DeliveryLinks } from "@/components/delivery-links";
@@ -41,13 +42,18 @@ export function Footer() {
             <ul className="mt-5 space-y-3">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="group inline-flex items-center gap-2 text-lg font-medium text-cream-100 transition-colors hover:text-berry-300"
-                  >
+                  <a href={`/${link.href}`} className={menuLink}>
                     {link.label}
-                    <ArrowRightIcon className="size-4 -translate-x-2 opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
+                    <MenuArrow />
                   </a>
+                </li>
+              ))}
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={menuLink}>
+                    {link.label}
+                    <MenuArrow />
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -122,5 +128,18 @@ export function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+const LEGAL_LINKS = [
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms & Conditions", href: "/terms" },
+];
+
+const menuLink = "group inline-flex items-center gap-2 text-lg font-medium text-cream-100 transition-colors hover:text-berry-300";
+
+function MenuArrow() {
+  return (
+    <ArrowRightIcon className="size-4 -translate-x-2 opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
   );
 }

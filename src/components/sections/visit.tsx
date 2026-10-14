@@ -7,7 +7,8 @@ import { EASE, Reveal, RisingWords, Squiggle } from "@/components/ui/motion-text
 import { DeliveryLinks } from "@/components/delivery-links";
 import { site, whatsappLink } from "@/lib/site";
 
-const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address)}`;
+// The shop's name makes Google Maps open the Choco Rush listing instead of a list of places nearby
+const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`Choco Rush, ${site.address}`)}`;
 const telUrl = `tel:${site.phone.replace(/[^\d+]/g, "")}`;
 
 export function Visit() {

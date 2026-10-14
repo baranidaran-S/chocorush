@@ -108,6 +108,29 @@ body {
   color: var(--color-cocoa-900);
 }
 
+/* Body text on the Privacy Policy and Terms & Conditions pages */
+@layer components {
+  .legal h2 {
+    @apply mt-12 font-display text-2xl font-semibold tracking-tight text-cocoa-900 sm:text-3xl;
+  }
+  .legal h3 {
+    @apply mt-8 inline-block rounded-full bg-berry-300/40 px-4 py-1.5 font-display text-lg font-semibold text-cocoa-900;
+  }
+  .legal p,
+  .legal ul {
+    @apply mt-4 text-base leading-relaxed text-cocoa-700 sm:text-lg;
+  }
+  .legal ul {
+    @apply list-disc space-y-2 pl-6 marker:text-berry-500;
+  }
+  .legal strong {
+    @apply font-semibold text-cocoa-900;
+  }
+  .legal a {
+    @apply font-semibold text-berry-600 underline decoration-berry-300 underline-offset-4 transition-colors hover:text-berry-500;
+  }
+}
+
 ::selection {
   background: var(--color-berry-300);
   color: var(--color-cocoa-950);
